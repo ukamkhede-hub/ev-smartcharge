@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EV SmartCharge | Smart EV Charging</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>EV SmartCharge</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Leaflet Map -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
 </head>
 
 <body>
 
 <header class="navbar">
+
     <div class="logo">
-        <span>⚡</span> EV SmartCharge
+        ⚡ EV SmartCharge
     </div>
 
     <nav>
@@ -28,93 +31,89 @@
         <a href="#about">About</a>
     </nav>
 
-    <button id="themeBtn" class="theme-btn">🌙</button>
+    <button id="themeBtn" class="theme-btn">
+        🌙
+    </button>
+
 </header>
 
 
-<main>
+<!-- ================= HOME ================= -->
 
 <section id="home" class="hero">
 
     <div class="hero-content">
 
-        <span class="badge">⚡ SMART ELECTRIC MOBILITY</span>
+        <span class="badge">
+            ⚡ Smart Electric Vehicle Platform
+        </span>
 
         <h1>
-            Charge Smarter.<br>
-            <span>Drive Further.</span>
+            Smart Charging
+            <span>For Smart Mobility</span>
         </h1>
 
         <p>
-            Find charging stations, calculate charging cost and
-            charging time with one smart EV platform.
+            Find EV charging stations, monitor your battery,
+            calculate charging cost and plan your journey.
         </p>
 
         <div class="hero-buttons">
-            <a href="#stations" class="btn primary">Find Charging Station</a>
-            <a href="#calculator" class="btn secondary">Calculate Cost</a>
+
+            <a href="#stations" class="primary-btn">
+                Find Charging Station
+            </a>
+
+            <a href="#dashboard" class="secondary-btn">
+                View Dashboard
+            </a>
+
         </div>
 
-        <div class="hero-stats">
-            <div>
-                <strong>24/7</strong>
-                <span>Smart Access</span>
-            </div>
-
-            <div>
-                <strong>⚡ Fast</strong>
-                <span>Charging</span>
-            </div>
-
-            <div>
-                <strong>₹</strong>
-                <span>Cost Tracking</span>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="hero-car">
-        <div class="car-glow"></div>
-
-        <div class="car">
-            <div class="car-window"></div>
-            <div class="car-body"></div>
-            <div class="wheel wheel-one"></div>
-            <div class="wheel wheel-two"></div>
-            <div class="light"></div>
-        </div>
-
-        <div class="charging-line">
-            ⚡
-        </div>
     </div>
 
 </section>
 
 
+<!-- ================= DASHBOARD ================= -->
+
 <section id="dashboard" class="section">
 
-    <div class="section-heading">
-        <span>LIVE DASHBOARD</span>
-        <h2>EV Energy Overview</h2>
-        <p>Monitor your EV charging information.</p>
+    <div class="section-title">
+
+        <span>EV DASHBOARD</span>
+
+        <h2>Battery & Energy Monitor</h2>
+
+        <p>
+            Monitor your EV battery condition.
+        </p>
+
     </div>
+
 
     <div class="dashboard-grid">
 
         <div class="dashboard-card battery-card">
 
             <div class="card-top">
-                <span>Battery Level</span>
-                <span>🔋</span>
+
+                <span>🔋 Battery Level</span>
+
+                <strong id="batteryValue">
+                    65%
+                </strong>
+
             </div>
 
-            <div class="battery-circle">
-                <div>
-                    <strong id="batteryDisplay">70%</strong>
-                    <small>Battery</small>
+            <div class="battery">
+
+                <div
+                    id="batteryFill"
+                    class="battery-fill"
+                    style="width:65%">
                 </div>
+
             </div>
 
             <input
@@ -122,52 +121,60 @@
                 id="batterySlider"
                 min="0"
                 max="100"
-                value="70"
+                value="65"
             >
 
-            <p>Adjust battery percentage</p>
+            <p id="batteryStatus">
+                Battery condition: Good
+            </p>
 
         </div>
 
 
         <div class="dashboard-card">
 
-            <div class="card-top">
-                <span>Charging Status</span>
-                <span class="status-dot"></span>
-            </div>
+            <span>🚗 Estimated Range</span>
 
-            <h3 id="chargingStatus">Ready to Charge</h3>
+            <h3>
+                <span id="rangeValue">
+                    195
+                </span>
+                km
+            </h3>
 
-            <div class="progress">
-                <div id="chargingProgress"></div>
-            </div>
-
-            <p id="statusText">Vehicle is waiting for charging.</p>
+            <p>
+                Based on current battery level
+            </p>
 
         </div>
 
 
         <div class="dashboard-card">
 
-            <div class="card-top">
-                <span>Energy Consumption</span>
-                <span>⚡</span>
-            </div>
+            <span>⚡ Energy Usage</span>
 
-            <h3>15.4 <small>kWh/100km</small></h3>
+            <h3>
+                15.4 kWh
+            </h3>
 
-            <div class="energy-bars">
-                <span style="height:40%"></span>
-                <span style="height:65%"></span>
-                <span style="height:50%"></span>
-                <span style="height:80%"></span>
-                <span style="height:60%"></span>
-                <span style="height:90%"></span>
-                <span style="height:72%"></span>
-            </div>
+            <p>
+                Average consumption
+            </p>
 
-            <p>Weekly energy pattern</p>
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <span>🌱 CO₂ Saved</span>
+
+            <h3>
+                12.8 kg
+            </h3>
+
+            <p>
+                Estimated environmental saving
+            </p>
 
         </div>
 
@@ -176,52 +183,181 @@
 </section>
 
 
+<!-- ================= STATIONS ================= -->
+
 <section id="stations" class="section stations-section">
 
-    <div class="section-heading">
+    <div class="section-title">
+
         <span>CHARGING NETWORK</span>
-        <h2>Find a Charging Station</h2>
-        <p>Explore nearby charging locations.</p>
+
+        <h2>⚡ Find EV Charging Stations</h2>
+
+        <p>
+            Search nearby charging stations or explore India.
+        </p>
+
     </div>
+
+
+    <div class="station-toolbar">
+
+        <button
+            id="nearbyBtn"
+            class="primary-btn">
+
+            📍 Near Me
+
+        </button>
+
+
+        <button
+            id="indiaBtn"
+            class="secondary-btn">
+
+            🇮🇳 All India
+
+        </button>
+
+    </div>
+
 
     <div class="station-controls">
 
         <input
             type="text"
             id="stationSearch"
-            placeholder="Search station or location..."
+            placeholder="🔎 Search city or station..."
         >
 
-        <select id="chargerFilter">
-            <option value="all">All Chargers</option>
-            <option value="fast">Fast Charger</option>
-            <option value="normal">Normal Charger</option>
+
+        <select id="distanceFilter">
+
+            <option value="5">
+                Within 5 km
+            </option>
+
+            <option value="10">
+                Within 10 km
+            </option>
+
+            <option value="25" selected>
+                Within 25 km
+            </option>
+
+            <option value="50">
+                Within 50 km
+            </option>
+
+            <option value="100">
+                Within 100 km
+            </option>
+
         </select>
+
+
+        <select id="chargerFilter">
+
+            <option value="all">
+                All Chargers
+            </option>
+
+            <option value="AC">
+                AC
+            </option>
+
+            <option value="DC">
+                DC
+            </option>
+
+            <option value="Fast">
+                Fast Charging
+            </option>
+
+        </select>
+
+
+        <select id="statusFilter">
+
+            <option value="all">
+                All Status
+            </option>
+
+            <option value="Operational">
+                Operational
+            </option>
+
+        </select>
+
+
+        <button
+            id="searchBtn"
+            class="primary-btn">
+
+            Search
+
+        </button>
 
     </div>
 
-    <div id="stationList" class="station-grid"></div>
+
+    <div id="evMap"></div>
+
+
+    <div class="station-heading">
+
+        <div>
+
+            <h2>
+                Charging Stations
+            </h2>
+
+            <p id="stationCount">
+                0 stations found
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="stationResults"
+        class="station-grid">
+
+    </div>
 
 </section>
 
 
-<section id="calculator" class="section calculator-section">
+<!-- ================= CALCULATOR ================= -->
 
-    <div class="section-heading">
-        <span>SMART CALCULATOR</span>
-        <h2>Charging Cost & Time</h2>
-        <p>Estimate your EV charging requirements.</p>
+<section id="calculator" class="section">
+
+    <div class="section-title">
+
+        <span>EV CALCULATOR</span>
+
+        <h2>Charging Cost Calculator</h2>
+
+        <p>
+            Estimate energy required and charging cost.
+        </p>
+
     </div>
+
 
     <div class="calculator">
 
         <div class="input-group">
 
-            <label>Battery Capacity (kWh)</label>
+            <label>
+                Battery Capacity (kWh)
+            </label>
 
             <input
                 type="number"
-                id="capacity"
+                id="batteryCapacity"
                 value="40"
                 min="1"
             >
@@ -231,7 +367,9 @@
 
         <div class="input-group">
 
-            <label>Current Battery (%)</label>
+            <label>
+                Current Battery (%)
+            </label>
 
             <input
                 type="number"
@@ -246,13 +384,15 @@
 
         <div class="input-group">
 
-            <label>Target Battery (%)</label>
+            <label>
+                Target Battery (%)
+            </label>
 
             <input
                 type="number"
                 id="targetBattery"
-                value="90"
-                min="1"
+                value="80"
+                min="0"
                 max="100"
             >
 
@@ -261,11 +401,13 @@
 
         <div class="input-group">
 
-            <label>Electricity Rate (₹/kWh)</label>
+            <label>
+                Electricity Price (₹/kWh)
+            </label>
 
             <input
                 type="number"
-                id="rate"
+                id="pricePerKwh"
                 value="12"
                 min="1"
             >
@@ -273,105 +415,124 @@
         </div>
 
 
-        <div class="input-group">
+        <button
+            id="calculateBtn"
+            class="primary-btn">
 
-            <label>Charger Power (kW)</label>
+            ⚡ Calculate
 
-            <select id="chargerPower">
-                <option value="7">7 kW</option>
-                <option value="15">15 kW</option>
-                <option value="30">30 kW</option>
-                <option value="60">60 kW</option>
-            </select>
-
-        </div>
-
-        <button onclick="calculateCharging()" class="btn primary calculate-btn">
-            Calculate
         </button>
 
-    </div>
+
+        <div class="calculator-result">
+
+            <div>
+
+                <span>
+                    Energy Required
+                </span>
+
+                <strong id="energyResult">
+                    0 kWh
+                </strong>
+
+            </div>
 
 
-    <div id="result" class="result hidden">
+            <div>
 
-        <div>
-            <span>Energy Required</span>
-            <strong id="energyResult">0 kWh</strong>
-        </div>
+                <span>
+                    Estimated Cost
+                </span>
 
-        <div>
-            <span>Estimated Cost</span>
-            <strong id="costResult">₹0</strong>
-        </div>
+                <strong id="costResult">
+                    ₹0
+                </strong>
 
-        <div>
-            <span>Charging Time</span>
-            <strong id="timeResult">0 min</strong>
+            </div>
+
         </div>
 
     </div>
 
 </section>
 
+
+<!-- ================= ABOUT ================= -->
 
 <section id="about" class="section about">
 
-    <div>
-        <span class="badge">ABOUT PROJECT</span>
+    <div class="section-title">
 
-        <h2>Smart Technology for Electric Mobility</h2>
+        <span>ABOUT PROJECT</span>
 
-        <p>
-            EV SmartCharge is a web-based smart electric vehicle
-            charging platform designed to help EV users understand
-            battery requirements, charging costs and charging station
-            information.
-        </p>
+        <h2>EV SmartCharge</h2>
 
         <p>
-            The project also demonstrates modern DevOps practices
-            including Git, GitHub, Docker and Jenkins CI/CD.
+            A smart EV charging and energy management
+            platform developed as a final-year
+            Electrical Engineering project.
         </p>
+
     </div>
 
-    <div class="tech-box">
 
-        <h3>Technology Stack</h3>
+    <div class="tech-grid">
 
-        <div class="tech-list">
-            <span>HTML5</span>
-            <span>CSS3</span>
-            <span>JavaScript</span>
-            <span>Node.js</span>
-            <span>Express</span>
-            <span>Docker</span>
-            <span>Jenkins</span>
-            <span>GitHub</span>
+        <div>
+            ⚡
+            <h3>Electrical Engineering</h3>
+            <p>
+                EV charging, battery and energy concepts.
+            </p>
+        </div>
+
+
+        <div>
+            🌐
+            <h3>Web Technology</h3>
+            <p>
+                HTML, CSS and JavaScript based platform.
+            </p>
+        </div>
+
+
+        <div>
+            🗺️
+            <h3>Map Technology</h3>
+            <p>
+                Interactive charging station map.
+            </p>
+        </div>
+
+
+        <div>
+            🚀
+            <h3>DevOps Ready</h3>
+            <p>
+                Docker, GitHub and CI/CD can be integrated.
+            </p>
         </div>
 
     </div>
 
 </section>
-
-</main>
 
 
 <footer>
 
-    <div class="logo">
-        ⚡ EV SmartCharge
-    </div>
-
     <p>
-        Smart EV Charging & Route Finder
-    </p>
-
-    <p class="copyright">
-        © 2026 EV SmartCharge. Built as a DevOps project.
+        © 2026 EV SmartCharge | Electrical Engineering Project
     </p>
 
 </footer>
+
+
+<!-- Leaflet JS -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
 
 
 <script src="script.js"></script>
