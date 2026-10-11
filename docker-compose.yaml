@@ -1,5 +1,4 @@
 services:
-
   frontend:
     build: ./frontend
     container_name: ev-smartcharge-frontend
@@ -7,9 +6,11 @@ services:
       - "8080:80"
     depends_on:
       - backend
+    restart: unless-stopped
 
   backend:
     build: ./backend
     container_name: ev-smartcharge-backend
     ports:
       - "5000:5000"
+    restart: unless-stopped
