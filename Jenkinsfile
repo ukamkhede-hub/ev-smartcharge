@@ -22,14 +22,12 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            steps {
-                sh 'docker compose down || true'
-                sh 'docker compose up -d --build'
-            }
-        }
-
+       stage('Deploy') {
+    steps {
+        sh 'docker-compose down || true'
+        sh 'docker-compose up -d --build'
     }
+}
 
     post {
         success {
